@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestion Tournois TCG</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Gestion Tournois TCG</h1>
+
+  <div id="timerContainer" style="margin-top:20px; font-family: monospace; font-size: 2em; text-align:center;">
+    <div id="timerDisplay">45:00</div>
+    <div style="margin-top:10px;">
+      <button id="timerStart">▶️ Play</button>
+      <button id="timerPause" disabled>⏸️ Pause</button>
+      <button id="timerReset">🔄 Reset</button>
+    </div>
+  </div>
+
+<audio id="alarmSound" src="coin-coin.mp3" preload="auto"></audio>
+<script>
+  const alarm = document.getElementById("alarmSound");
+  alarm.volume = 1; // 50 % de volume
+</script>
+
+  <form id="tournoiForm">
+    <label for="tcg">Sélectionner un TCG :</label>
+    <select id="tcg" name="tcg" required>
+      <option value="" disabled selected>Choisir un TCG</option>
+      <option value="Pokemon">Pokémon</option>
+      <option value="YuGiOh">Yu-Gi-Oh</option>
+      <option value="OnePiece">OnePiece</option>    </select>
+
+    <label for="tournoiType">Sélectionner un type de tournoi :</label>
+    <select id="tournoiType" name="tournoiType" required>
+      <option value="" disabled selected>Choisir un type</option>
+    </select>
+
+    <div id="paramsTournoi">
+      <label for="nbJoueurs">Nombre de joueurs :</label>
+      <input type="number" id="nbJoueurs" name="nbJoueurs" min="3" max="2000" required />
+
+      <label for="paf">Prix d'inscription (PAF) :</label>
+      <input type="number" id="paf" name="paf" step="0.01" required />
+
+      <label for="marge">Marge (ex: 0.2 pour 20%) :</label>
+      <input type="number" id="marge" name="marge" step="0.01" min="0" max="1" required />
+
+      <label for="prixProduit">Prix unitaire produit :</label>
+      <input type="number" id="prixProduit" name="prixProduit" step="0.01" required />
+      <div id="champLot1er" style="display: none;">
+        <label for="coutLot1er">Coût TTC du lot du 1er :</label>
+        <input type="number" id="coutLot1er" name="coutLot1er" step="0.01" min="0" />
+      </div>
+    </div>
+
+    <button type="submit">Générer les lots</button>
+    <span id="totalLotsAffiche" style="margin-left: 10px; font-weight: bold;"></span>
+
+  </form>
+
+  <p id="messageErreur"></p>
+
+  <table id="tableLots" display="none">
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Nombre de joueurs</th>
+        <th>Lots par joueur</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>

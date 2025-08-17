@@ -1,0 +1,51 @@
+{
+  "Pokemon": [
+    {
+      "nom": "Standard League",
+      "paf": 5,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 4.5,
+      "marge": 0.2,
+      "timerMinutes": 50,
+      "overtimeMinutes": 3
+    }
+  ],
+  "YuGiOh": [
+    {
+      "nom": "Tournois boosters",
+      "paf": 6,
+      "minJoueurs": 3,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 2.45,
+      "marge": 0.2,
+      "timerMinutes": 45,
+      "overtimeMinutes": 0,
+      "lot1er": false
+    },
+    {
+      "nom": "win a display",
+      "paf": 12,
+      "minJoueurs": 12,
+      "lotsMinParJoueur": 2,
+      "prixUnitaireProduit": 2.45,
+      "marge": 0.2,
+      "timerMinutes": 45,
+      "overtimeMinutes": 0,
+      "lot1er" : true,
+      "coutLot1er" : 58.8
+    }
+  ],
+  "OnePiece": [
+    {
+      "nom": "Weekly Fight",
+      "paf": 7,
+      "minJoueurs": 8,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 5.0,
+      "marge": 0.3,
+      "timerMinutes": 30,
+      "overtimeMinutes": 5
+    }
+  ]
+}
