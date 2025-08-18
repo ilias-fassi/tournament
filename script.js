@@ -5,9 +5,9 @@ fetch("tournois.json")
   .then((res) => res.json())
   .then((data) => {
     dataTournois = data;
-  });
+  });  
 
-function updateTournoiParams({ paf, marge, prixUnitaireProduit, minJoueurs, minLots }) {
+  function updateTournoiParams({ paf, marge, prixUnitaireProduit, minJoueurs, minLots }) {
   const tcg = tcgSelect.value;
   const typeIndex = typeSelect.value;
 
@@ -128,7 +128,7 @@ function calcDistribution(nbJoueurs) {
 }
 
 // Calcule les lots en fonction de la distribution et paramètres
-function updateLots(distribution, paf, marge, prixProduit, minLots) {
+function updateLots(distribution, paf, marge, prixProduit, minLots, lot1er, coutLot1er) {
   const nbJoueurs = distribution.reduce((acc, cur) => acc + cur.joueurs, 0);
   const cagnotte = nbJoueurs * paf * (1 - marge);
   const totalLots = Math.floor(cagnotte / prixProduit);
@@ -182,7 +182,6 @@ function updateLots(distribution, paf, marge, prixProduit, minLots) {
   // mode lot1er : true
   const cagnotteRestante = cagnotte - coutLot1er;
   let lotsDispo = Math.floor(cagnotteRestante / prixProduit);
-
   let nbX1 = 0;
   let nbX2Plus = 0;
 
@@ -200,20 +199,33 @@ function updateLots(distribution, paf, marge, prixProduit, minLots) {
 
   // Construction de la nouvelle distribution
   return distribution.map(row => {
-    let lots = 0;
-    if (row.score === "X-0") {
-      lots = 0; // il a le lot spécial
-    } else if (row.score === "X-1") {
-      lots = lotsParX1;
-    } else {
-      lots = minLots;
-    }
+  let lotsTotal = 0;
 
-    return {
-      ...row,
-      lots
-    };
-  });
+  if (row.score === "X-0") {
+    lotsTotal = 0; // le X-0 a le lot spécial
+  } else if (row.score === "X-1") {
+    lotsTotal = lotsParX1 * row.joueurs;   // ✅ total pour la ligne
+  } else {
+    lotsTotal = minLots * row.joueurs;     // ✅ total pour la ligne
+  }
+
+  return { ...row, lots: lotsTotal };
+});
+  // return distribution.map(row => {
+  //   let lots = 0;
+  //   if (row.score === "X-0") {
+  //     lots = 0; // il a le lot spécial
+  //   } else if (row.score === "X-1") {
+  //     lots = lotsParX1;
+  //   } else {
+  //     lots = minLots;
+  //   }
+
+  //   return {
+  //     ...row,
+  //     lots
+  //   };
+  // });
   
 }
 
@@ -230,7 +242,7 @@ function estRentableCustom(nbJoueurs, paf, marge, prixProduit, minLots, lot1er, 
 }
 
 // Affiche le tableau avec inputs modifiables pour nombre de joueurs et recalcul dynamique des lots
-function afficherTable(distribution, paf, marge, prixProduit, minLots) {
+function afficherTable(distribution, paf, marge, prixProduit, minLots, lot1er, coutLot1er) {
   tableBody.innerHTML = "";
 
   let currentDist = distribution.map((d) => ({ ...d }));
@@ -238,12 +250,15 @@ function afficherTable(distribution, paf, marge, prixProduit, minLots) {
   function render() {
     tableBody.innerHTML = "";
 
+    // pb ici à l'appel de updateLots /!\ /!\
     const lotsDistrib = updateLots(
       currentDist,
       paf,
       marge,
       prixProduit,
-      minLots
+      minLots,
+      lot1er,
+      coutLot1er
     );
 
     const totalLotsDistribues = lotsDistrib.reduce((acc, row) => acc + row.lots, 0);
@@ -257,7 +272,6 @@ function afficherTable(distribution, paf, marge, prixProduit, minLots) {
     }
 
     totalLotsAffiche.textContent = texte;
-
 
     lotsDistrib.forEach((row, i) => {
       const tr = document.createElement("tr");
@@ -349,12 +363,12 @@ form.addEventListener("submit", (e) => {
   }
 
   if (!tournoiType.lot1er && !estRentable(nbJoueurs, paf, marge, prixProduit, minLots)) {
-  messageErreur.textContent = "⚠️ Le tournoi n'est pas rentable avec ces paramètres.";
+  messageErreur.textContent = "⚠️ Tournoi non rentable, augmentez le PAF ou diminuez la marge.";
   return;
   }
 
   if (!estRentableCustom(nbJoueurs, paf, marge, prixProduit, minLots, tournoiType.lot1er, coutLot1er)) {
-    messageErreur.textContent = "⚠️ Ce tournoi n'est pas rentable avec ces paramètres.";
+    messageErreur.textContent = "⚠️ Tournoi non rentable, augmentez le PAF ou diminuez la marge.";
     return;
   }
 
@@ -364,7 +378,7 @@ form.addEventListener("submit", (e) => {
   const distribution = calcDistribution(nbJoueurs);
 
   // Affiche le tableau interactif
-  afficherTable(distribution, paf, marge, prixProduit, minLots);
+  afficherTable(distribution, paf, marge, prixProduit, minLots, tournoiType.lot1er, coutLot1er);
 });
 
 
