@@ -38,7 +38,7 @@ const champLot1er = document.getElementById("champLot1er");
 
 
 
-// Mise à jour du menu des types selon le TCG choisi
+// Maj types selon le TCG choisi
 tcgSelect.addEventListener("change", () => {
   const tcg = tcgSelect.value;
   typeSelect.innerHTML = `<option value="" disabled selected>Choisir un type</option>`;
@@ -94,17 +94,13 @@ typeSelect.addEventListener("change", () => {
   }
 });
 
-
 // --- Nouvelle fonction binomiale ---
-
 function factorial(n) {
   return n <= 1 ? 1 : n * factorial(n - 1);
 }
-
 function binomialCoef(n, k) {
   return factorial(n) / (factorial(k) * factorial(n - k));
 }
-
 function binomialPMF(k, n, p) {
   return binomialCoef(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
 }
@@ -130,8 +126,6 @@ function calcDistribution(nbJoueurs) {
 
   return distribution;
 }
-
-
 
 // Calcule les lots en fonction de la distribution et paramètres
 function updateLots(distribution, paf, marge, prixProduit, minLots) {
@@ -222,9 +216,6 @@ function updateLots(distribution, paf, marge, prixProduit, minLots) {
   });
   
 }
-
-
-
 
 function estRentable(nbJoueurs, paf, marge, prixProduit, minLots) {
     const recettes = nbJoueurs * paf * (1 - marge);
@@ -317,8 +308,6 @@ function afficherTable(distribution, paf, marge, prixProduit, minLots) {
   tableLots.style.display = "table";
 }
 
-
-
 // Gestion du submit formulaire
 form.addEventListener("submit", (e) => {
   totalLotsAffiche.textContent = "";
@@ -379,16 +368,12 @@ form.addEventListener("submit", (e) => {
 });
 
 
-
-
 // Minuteur personnalisable
-
 const timerDisplay = document.getElementById("timerDisplay");
 const btnStart = document.getElementById("timerStart");
 const btnPause = document.getElementById("timerPause");
 const btnReset = document.getElementById("timerReset");
 const alarmSound = document.getElementById("alarmSound");
-
 let timerDuration = 15; // 2700sec 45 minutes en secondes (par défaut)
 let overtimeDuration = 300; // 5 minutes en secondes (par défaut)
 let currentTime = timerDuration;
@@ -402,7 +387,6 @@ function formatTime(seconds) {
   const s = absSeconds % 60;
   return `${seconds < 0 ? "-" : ""}${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
 }
-
 function playAlarm() {
   const alarm = document.getElementById("alarmSound");
   if (!alarm) return;
@@ -435,11 +419,6 @@ function playAlarm() {
 
   loopPlayback();
 }
-
-
-
-
-
 function updateTimer() {
   currentTime--;
   timerDisplay.textContent = formatTime(currentTime);
@@ -477,8 +456,6 @@ btnStart.addEventListener("click", () => {
     btnPause.disabled = false;
   }
 });
-
-
 btnPause.addEventListener("click", () => {
   if (timerInterval) {
     clearInterval(timerInterval);
@@ -487,7 +464,6 @@ btnPause.addEventListener("click", () => {
     btnPause.disabled = true;
   }
 });
-
 btnReset.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
