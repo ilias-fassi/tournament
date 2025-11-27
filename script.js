@@ -235,11 +235,24 @@ function estRentable(nbJoueurs, paf, marge, prixProduit, minLots) {
     return recettes >= coutMin;
 }
 
-function estRentableCustom(nbJoueurs, paf, marge, prixProduit, minLots, lot1er, coutLot1er) {
+function estRentableCustom(nbJoueurs, paf, marge, prixProduit, minLots, coutLot1er) {
     const recettes = nbJoueurs * paf * (1 - marge);
     const coutMin = ((nbJoueurs - 1) * minLots * prixProduit) + coutLot1er;
     return recettes >= coutMin;
 }
+
+function nbJoueursMin (paf, marge, prixProduit, minLots, coutLot1er) {
+    return Math.ceil((coutLot1er-minLots*prixProduit)/(paf*(1-marge)-minLots*prixProduit));
+}
+
+function pafMin (nbJoueurs, marge, prixProduit, minLots, coutLot1er) {
+    return Math.ceil((coutLot1er+(nbJoueurs-1)*minLots*prixProduit)/(nbJoueurs*(1-marge)));
+}
+
+function margeMax (nbJoueurs, paf, prixProduit, minLots, coutLot1er) {
+    return (1 - (coutLot1er+(nbJoueurs-1)*minLots*prixProduit)/(nbJoueurs*paf)).toFixed(2);
+}
+
 
 // Affiche le tableau avec inputs modifiables pour nombre de joueurs et recalcul dynamique des lots
 function afficherTable(distribution, paf, marge, prixProduit, minLots, lot1er, coutLot1er) {
@@ -357,18 +370,21 @@ form.addEventListener("submit", (e) => {
     coutLot1er
   });
 
-  if (isNaN(nbJoueurs) || nbJoueurs < tournoiType.minJoueurs) {
-    messageErreur.textContent = `⚠️ Nombre de joueurs insuffisant (minimum requis: ${tournoiType.minJoueurs})`;
+  if (isNaN(nbJoueurs) || nbJoueurs < nbJoueursMin (paf, marge, prixProduit, minLots, coutLot1er)) {
+  messageErreur.textContent = `⚠️ Tournoi non rentable, augmentez le PAF (min : ${pafMin (nbJoueurs, marge, prixProduit, minLots, coutLot1er)})`
+  +`, le nombre de joueurs (min : ${nbJoueursMin (paf, marge, prixProduit, minLots, coutLot1er)})`
+  +` ou diminuez la marge (max : ${margeMax (nbJoueurs, paf, prixProduit, minLots, coutLot1er)}).`;
     return;
   }
+  // ADD CONDITIONS : SI Nmin > 0, SI Mmax > 0 alors on les affiches sinon non.
 
   if (!tournoiType.lot1er && !estRentable(nbJoueurs, paf, marge, prixProduit, minLots)) {
-  messageErreur.textContent = "⚠️ Tournoi non rentable, augmentez le PAF ou diminuez la marge.";
+  messageErreur.textContent = `⚠️ Tournoi non rentable, augmentez le PAF (min : ${pafMin (nbJoueurs, marge, prixProduit, minLots, coutLot1er)}), le nombre de joueurs (min : ${nbJoueursMin (paf, marge, prixProduit, minLots, coutLot1er)}) ou diminuez la marge (max : ${margeMax (nbJoueurs, paf, prixProduit, minLots, coutLot1er)}).`;
   return;
   }
 
   if (!estRentableCustom(nbJoueurs, paf, marge, prixProduit, minLots, tournoiType.lot1er, coutLot1er)) {
-    messageErreur.textContent = "⚠️ Tournoi non rentable, augmentez le PAF ou diminuez la marge.";
+  messageErreur.textContent = `⚠️ Tournoi non rentable, augmentez le PAF (min : ${pafMin (nbJoueurs, marge, prixProduit, minLots, coutLot1er)}), le nombre de joueurs (min : ${nbJoueursMin (paf, marge, prixProduit, minLots, coutLot1er)}) ou diminuez la marge (max : ${margeMax (nbJoueurs, paf, prixProduit, minLots, coutLot1er)}).`;
     return;
   }
 

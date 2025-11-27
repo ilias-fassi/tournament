@@ -1,16 +1,4 @@
 {
-  "Pokemon": [
-    {
-      "nom": "Standard League",
-      "paf": 5,
-      "minJoueurs": 4,
-      "lotsMinParJoueur": 1,
-      "prixUnitaireProduit": 4.5,
-      "marge": 0.2,
-      "timerMinutes": 50,
-      "overtimeMinutes": 3
-    }
-  ],
   "YuGiOh": [
     {
       "nom": "Tournois boosters",
@@ -19,7 +7,7 @@
       "lotsMinParJoueur": 1,
       "prixUnitaireProduit": 2.45,
       "marge": 0.2,
-      "timerMinutes": 45,
+      "timerMinutes": 50,
       "overtimeMinutes": 0,
       "lot1er": false
     },
@@ -30,7 +18,7 @@
       "lotsMinParJoueur": 2,
       "prixUnitaireProduit": 2.45,
       "marge": 0.2,
-      "timerMinutes": 45,
+      "timerMinutes": 50,
       "overtimeMinutes": 0,
       "lot1er" : true,
       "coutLot1er" : 58.8
@@ -38,14 +26,38 @@
   ],
   "OnePiece": [
     {
-      "nom": "Weekly Fight",
+      "nom": "Weekly",
       "paf": 7,
-      "minJoueurs": 8,
+      "minJoueurs": 4,
       "lotsMinParJoueur": 1,
-      "prixUnitaireProduit": 5.0,
-      "marge": 0.3,
+      "prixUnitaireProduit": 3.21,
+      "marge": 0.2,
       "timerMinutes": 30,
       "overtimeMinutes": 5
+    }
+  ],
+  "Pokemon": [
+    {
+      "nom": "Standard League",
+      "paf": 5,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 3.31,
+      "marge": 0.2,
+      "timerMinutes": 50,
+      "overtimeMinutes": 3
+    }
+  ],
+  "RiftBound": [
+    {
+      "nom": "Weekly",
+      "paf": 7,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 2.91,
+      "marge": 0.2,
+      "timerMinutes": 50,
+      "overtimeMinutes": 0
     }
   ]
 }
