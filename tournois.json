@@ -26,8 +26,8 @@
   ],
   "OnePiece": [
     {
-      "nom": "Tournois boosters",
-      "paf": 7,
+      "nom": "Classic - Tournois boosters",
+      "paf": 6,
       "minJoueurs": 4,
       "lotsMinParJoueur": 1,
       "prixUnitaireProduit": 3.21,
@@ -35,14 +35,70 @@
       "timerMinutes": 30,
       "overtimeMinutes": 5,
       "lot1er": false
+    },
+    {
+      "nom": "2v2 / Buddy battle",
+      "paf": 12,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 2,
+      "prixUnitaireProduit": 3.21,
+      "marge": 0.2,
+      "timerMinutes": 30,
+      "overtimeMinutes": 5,
+      "lot1er": false
+    },
+    {
+      "nom": "3v3",
+      "paf": 18,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 3,
+      "prixUnitaireProduit": 3.21,
+      "marge": 0.2,
+      "timerMinutes": 30,
+      "overtimeMinutes": 5,
+      "lot1er": false
+    },
+    {
+      "nom": "Win a X - display par defaut",
+      "paf": 12,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 3.21,
+      "marge": 0.2,
+      "timerMinutes": 30,
+      "overtimeMinutes": 5,
+      "lot1er": true,
+      "coutLot1er" : 77.84
     }
   ],
   "Pokemon": [
     {
-      "nom": "Tournois boosters",
-      "paf": 5,
+      "nom": "Session tournoi",
+      "paf": 6,
       "minJoueurs": 4,
       "lotsMinParJoueur": 1,
+      "prixUnitaireProduit": 3.31,
+      "marge": 0.2,
+      "timerMinutes": 50,
+      "overtimeMinutes": 3,
+      "lot1er": false
+    },
+    {
+      "nom": "Défi de Ligue",
+      "paf": 15,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 2,
+      "prixUnitaireProduit": 3.31,
+      "marge": 0.2,
+      "timerMinutes": 50,
+      "overtimeMinutes": 3,
+      "lot1er": false
+    },
+    {
+      "nom": "Coupe de Ligue",
+      "paf": 20,
+      "minJoueurs": 4,
+      "lotsMinParJoueur": 3,
       "prixUnitaireProduit": 3.31,
       "marge": 0.2,
       "timerMinutes": 50,

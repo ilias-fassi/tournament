@@ -358,7 +358,12 @@ form.addEventListener("submit", (e) => {
   const paf = parseFloat(inputPAF.value);
   const marge = parseFloat(inputMarge.value);
   const prixProduit = parseFloat(inputPrixProduit.value);
-  const minLots = tournoiType.lot1er ? tournoiType.lotsMinParJoueur : Math.floor(paf / 5);
+  // const minLots = tournoiType.lot1er ? tournoiType.lotsMinParJoueur : Math.floor(paf / 5);
+  const minLots =
+  tournoiType.lot1er || tcg === "Pokemon"
+    ? tournoiType.lotsMinParJoueur
+    : Math.floor(paf / 5);
+
   const coutLot1er = parseFloat(coutLot1erInput?.value || "0");
 
   updateTournoiParams({
