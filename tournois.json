@@ -26,38 +26,41 @@
   ],
   "OnePiece": [
     {
-      "nom": "Weekly",
+      "nom": "Tournois boosters",
       "paf": 7,
       "minJoueurs": 4,
       "lotsMinParJoueur": 1,
       "prixUnitaireProduit": 3.21,
       "marge": 0.2,
       "timerMinutes": 30,
-      "overtimeMinutes": 5
+      "overtimeMinutes": 5,
+      "lot1er": false
     }
   ],
   "Pokemon": [
     {
-      "nom": "Standard League",
+      "nom": "Tournois boosters",
       "paf": 5,
       "minJoueurs": 4,
       "lotsMinParJoueur": 1,
       "prixUnitaireProduit": 3.31,
       "marge": 0.2,
       "timerMinutes": 50,
-      "overtimeMinutes": 3
+      "overtimeMinutes": 3,
+      "lot1er": false
     }
   ],
   "RiftBound": [
     {
-      "nom": "Weekly",
+      "nom": "Tournois boosters",
       "paf": 7,
       "minJoueurs": 4,
       "lotsMinParJoueur": 1,
       "prixUnitaireProduit": 2.91,
       "marge": 0.2,
       "timerMinutes": 50,
-      "overtimeMinutes": 0
+      "overtimeMinutes": 0,
+      "lot1er": false
     }
   ]
 }
